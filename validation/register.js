@@ -14,14 +14,14 @@ module.exports = function validateRegisterInput(data) {
   if (Validator.isEmpty(data.name)) {
     errors.name = "Необходимо ввести имя";
   }
-  if (Validator.isEmpty(data.password)) {
-    errors.password = "Необходимо ввести пароль";
-  }
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = "Пароль должен содержать от 6 до 30 знаков";
   }
+  if (Validator.isEmpty(data.password)) {
+    errors.password = "Необходимо ввести пароль";
+  }
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = "Необходимо ввести пароль";
+    errors.password2 = "Необходимо подтвердить пароль";
   }
   if (!Validator.equals(data.password, data.password2)) {
     errors.password2 = "Пароли должны совпадать";
