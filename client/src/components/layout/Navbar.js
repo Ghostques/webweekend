@@ -8,16 +8,20 @@ class Navbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser();
+    window.location.href = "/";
   }
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    console.log(this.state)
+    const { isAuthenticated } = this.props.auth;
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <a
             href=""
             onClick={this.onLogoutClick.bind(this)}
-            className="nav-link">Logout            
+            className="nav-link"
+          >
+            Logout
           </a>
         </li>
       </ul>
@@ -52,14 +56,6 @@ class Navbar extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="mobile-nav">
-            {/* <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="profiles.html">
-                  {" "}
-                  Developers
-                </a>
-              </li>
-            </ul> */}
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
@@ -74,7 +70,8 @@ Navbar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  props:state.props
 });
 
 export default connect(

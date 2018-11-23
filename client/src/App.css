@@ -43,3 +43,10 @@ footer {
   position: absolute;
   width: 100%
 }
+.todo-delete{
+  float: right;
+  cursor: pointer;
+}
+footer{
+  
+}

@@ -30,23 +30,39 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const todosFields = {};
-    todosFields.user = req.user.id;
-    if (typeof req.body.todos !== "undefined") {
-      todosFields.todos = req.body.todos.split(",");
-    }
-
+    const todoField = {};
+    todoField.title = req.body.title;
     Todos.findOne({ user: req.user.id }).then(todos => {
-      if (todos) {
-        Todos.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: todosFields },
-          { new: true }
-        ).then(todos => res.json(todos));
+      console.log(todos);
+      if (todos === null) {
+        new Todos({ todos: [], user: req.user.id }).save().then(todos => {
+          todos.todos.push(todoField);
+          todos.save().then(todos => res.json(todos));
+        });
       } else {
-        new Todos(todosFields).save().then(todos => res.json(todos));
+        todos.todos.push(todoField);
+        todos.save().then(todos => res.json(todos));
       }
     });
+  }
+);
+
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const todoField = {};
+    todoField.title = req.body.title;
+
+    Todos.findOne({ user: req.user.id })
+      .then(todos => {
+        const removeIndex = todos.todos
+          .map(item => item.id)
+          .indexOf(req.params.id);
+        todos.todos.splice(removeIndex, 1);
+        todos.save().then(todos => res.json(todos));
+      })
+      .catch(err => res.status(404).json(err));
   }
 );
 

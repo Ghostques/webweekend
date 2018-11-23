@@ -38,7 +38,6 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/todos" component={Todos} />
             </div>
-            <Footer />
           </div>
         </Router>
       </Provider>

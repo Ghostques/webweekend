@@ -6,9 +6,13 @@ const TodosSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-  todos: {
-    type: [String]
-  }
+  todos: [
+    {
+      title:{
+        type: String
+      }
+    }
+  ]
 });
 
 module.exports = Todos = mongoose.model("todos", TodosSchema);
