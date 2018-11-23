@@ -15,11 +15,10 @@ class Todos extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       window.location.href = "/";
-    }    
+    }
     this.props.getTodos();
   }
 
@@ -33,13 +32,13 @@ class Todos extends Component {
     const todoData = {
       title: this.state.title
     };
-    if(todoData.title != '')this.props.addTodo(todoData);
-    
-    this.setState({title:''})
+    if (todoData.title != "") this.props.addTodo(todoData);
+
+    this.setState({ title: "" });
   }
 
-  onDelete(id){
-    this.props.deleteTodo(id)
+  onDelete(id) {
+    this.props.deleteTodo(id);
   }
 
   render() {
@@ -53,7 +52,13 @@ class Todos extends Component {
         todos.todos.map(todo => {
           return (
             <div className="list-group-item" key={todo._id}>
-              <span>{todo.title}</span><span className="todo-delete" onClick={this.onDelete.bind(this, todo._id)}><i className="far fa-trash-alt"></i></span>
+              <span>{todo.title}</span>
+              <span
+                className="todo-delete"
+                onClick={this.onDelete.bind(this, todo._id)}
+              >
+                <i className="far fa-trash-alt" />
+              </span>
             </div>
           );
         })

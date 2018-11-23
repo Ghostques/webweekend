@@ -16,8 +16,8 @@ export const addTodo = todoData => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: {} }));
 };
 export const deleteTodo = id => dispatch => {
-    axios
-      .delete(`api/todos/${id}`)
-      .then(res => dispatch({ type: GET_TODOS, payload: res.data }))
-      .catch(err => dispatch({ type: GET_ERRORS, payload: {} }));
-  };
+  axios
+    .delete(`api/todos/${id}`)
+    .then(res => dispatch({ type: GET_TODOS, payload: res.data }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: {} }));
+};
