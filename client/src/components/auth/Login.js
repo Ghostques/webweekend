@@ -12,29 +12,28 @@ class Login extends Component {
       password: "",
       errors: {}
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/todos");
+    const { auth, history } = this.props;
+    if (auth.isAuthenticated) {
+      history.push("/");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/todos");
+      this.props.history.push("/");
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
 
-  onChange(e) {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
-  onSubmit(e) {
+  };
+  onSubmit = e => {
     e.preventDefault();
 
     const userData = {
@@ -43,7 +42,7 @@ class Login extends Component {
     };
 
     this.props.loginUser(userData);
-  }
+  };
   render() {
     const { errors } = this.state;
     return (

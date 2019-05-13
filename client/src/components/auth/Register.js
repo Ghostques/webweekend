@@ -14,13 +14,12 @@ class Register extends Component {
       password2: "",
       errors: {}
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/todos");
+    const { auth, history } = this.props;
+    if (auth.isAuthenticated) {
+      history.push("/");
     }
   }
 
@@ -30,10 +29,10 @@ class Register extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
-  onSubmit(e) {
+  };
+  onSubmit = e => {
     e.preventDefault();
 
     const newUser = {
@@ -43,7 +42,7 @@ class Register extends Component {
     };
 
     this.props.registerUser(newUser, this.props.history);
-  }
+  };
   render() {
     const { errors } = this.state;
 
@@ -53,9 +52,7 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">
-                Create your DevConnector account
-              </p>
+              <p className="lead text-center">Create your account</p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input

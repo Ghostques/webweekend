@@ -5,24 +5,19 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
 class Navbar extends Component {
-  onLogoutClick(e) {
+  onLogoutClick = e => {
+    const { logoutUser } = this.props;
     e.preventDefault();
-    this.props.logoutUser();
-    window.location.href = "/";
-  }
+    logoutUser();
+  };
   render() {
-    console.log(this.state)
     const { isAuthenticated } = this.props.auth;
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <a
-            href=""
-            onClick={this.onLogoutClick.bind(this)}
-            className="nav-link"
-          >
+          <Link className="nav-link" to="/" onClick={this.onLogoutClick}>
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     );
@@ -43,9 +38,9 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
-          <a className="navbar-brand" href="">
-            TodoApp
-          </a>
+          <Link className="navbar-brand" to="/">
+            YourApp
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -71,7 +66,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  props:state.props
+  props: state.props
 });
 
 export default connect(

@@ -1,32 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 class Landing extends Component {
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/todos");
-    }
-  }
-
   render() {
+    const { auth } = this.props;
     return (
       <div className="landing">
-        <div className="dark-overlay landing-inner text-light">
+        <div className="dark-overlay landing-inner">
           <div className="container">
             <div className="row">
-              <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">Todo App</h1>
-                <p className="lead"> Create your own todo list</p>
-                <hr />
-                <Link to="/register" className="btn btn-lg btn-info mr-2">
-                  Sign Up
-                </Link>
-                <Link to="/login" className="btn btn-lg btn-light">
-                  Login
-                </Link>
-              </div>
+              {!auth.isAuthenticated ? (
+                <div className="col-md-12 text-center">
+                  <h1 className="display-3 mb-4">Your App</h1>
+                  <p className="lead"> Create your own application</p>
+                  <hr />
+                  <Link to="/register" className="btn btn-lg btn-info mr-2">
+                    Sign Up
+                  </Link>
+                  <Link to="/login" className="btn btn-lg btn-light">
+                    Login
+                  </Link>
+                </div>
+              ) : (
+                <div className="col-md-12 text-center">
+                  <h1 className="display-3 mb-4">{`Привет ${
+                    auth.user.role
+                  } `}</h1>
+                  <h1 className="display-3 mb-4">{`по имени ${
+                    auth.user.name
+                  } `}</h1>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -43,4 +50,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps)(withRouter(Landing));

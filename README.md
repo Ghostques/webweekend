@@ -1,4 +1,5 @@
-# ToDoReactNode
+# AppReactNode
+
 Для запуска проекта:
 Установите локальную MongoDB
 утановите зависимости npm install в корне проекта и в папке client
