@@ -14,7 +14,7 @@ class Landing extends Component {
             <div className="row">
               {!auth.isAuthenticated ? (
                 <div className="col-md-12 text-center">
-                  <h1 className="display-3 mb-4">Your App</h1>
+                  <h1 className="display-3 mb-4">WebWeekend</h1>
                   <p className="lead"> Create your own application</p>
                   <hr />
                   <Link to="/register" className="btn btn-lg btn-info mr-2">
