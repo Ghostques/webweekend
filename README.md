@@ -1,10 +1,10 @@
 # AppReactNode
 
-Небольшой пример приложения для хакатона [WebWeekend](vk.com/webweekend), который пройдет 25-26 мая в Петрозаводске.
+Небольшой пример приложения для хакатона [WebWeekend](https://vk.com/webweekend), который пройдет 25-26 мая в Петрозаводске.
 
 > Стек: React, NodeJS, MongoDB
 
-## Запуск проекта
+## Развертывание проекта
 
 ### Установить [MongoDB](https://ru.wikipedia.org/wiki/MongoDB)
 
