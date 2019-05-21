@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 const users = require("./routes/api/users");
+const adminSeeder = require("./seed/adminSeeder");
 
 const app = express();
 
@@ -12,7 +13,10 @@ app.use(bodyParser.json());
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/yourappdb")
-  .then(() => console.log("connected to db"))
+  .then(() => {
+    console.log("connected to db");
+    adminSeeder();
+  })
   .catch(error => console.log(error));
 
 app.use(passport.initialize());
