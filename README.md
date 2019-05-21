@@ -54,10 +54,6 @@ apt-get install -y nodejs
 4. `cd client`
 5. [повторить шаг 3]
 
-### Установить расширение [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ru) для Chrome
-
-Официальный магазин расширений: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ru
-
 ### Запуск проекта
 
 1. Открыть терминал
