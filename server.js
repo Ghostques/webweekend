@@ -17,7 +17,7 @@ mongoose
     console.log("connected to db");
     adminSeeder();
   })
-  .catch(error => console.log(error));
+  .catch(() => console.log("Having problems connecting to the database"));
 
 app.use(passport.initialize());
 
