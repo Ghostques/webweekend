@@ -27,6 +27,13 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/user", user);
 
+
+app.use(function(req, res){
+    console.log('404 - back');
+    res.status(404);
+    res.send('404');
+});
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`server running on port ${port}`));

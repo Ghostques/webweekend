@@ -14,7 +14,7 @@ router.post("/name/add", (req, res) => {
         return res.status(400).json(errors);
     }
 
-    User.findOne({name: req.params.login}).then(userName => {
+    // User.findOne({name: req.body.login}).then(userName => {
 
         const newUserName = new UserName({
             login: req.body.login,
@@ -31,9 +31,9 @@ router.post("/name/add", (req, res) => {
             .then(userName => res.json(userName))
             .catch(err => console.log(err));
 
-    });
+    // });
 
-    return res.status(200).json();
+    return res.status(200).json(newUserName);
 });
 
 module.exports = router;
