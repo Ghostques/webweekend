@@ -5,15 +5,16 @@ const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
-// User Namee register
-router.post("/user/name/add/:name", (req, res) => {
+// User Name add
+router.post("/name/add", (req, res) => {
 
     console.log('asd');
 
-    User.findOne({name: req.params.name}).then(user => {
+    User.findOne({name: req.params.login}).then(user_name => {
+
 
         const newUserName = new UserName({
-            login: req.params.name,
+            login: req.body.login,
             first_name: req.body.first_name,
             second_name: req.body.second_name,
             family: req.body.family
@@ -21,7 +22,7 @@ router.post("/user/name/add/:name", (req, res) => {
 
         newUserName
             .save()
-            .then(user => res.json(user))
+            .then(user_name => res.json(user_name))
             .catch(err => console.log(err));
 
     });
