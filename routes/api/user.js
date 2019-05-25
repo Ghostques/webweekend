@@ -28,10 +28,9 @@ router.post("/name/add", (req, res) => {
     });
     newUserName
         .save()
-        .then(userName => res.json(userName))
-        .catch(err => console.log(err));
+        .then((data) => res.status(200).json(data.toJSON()))
+        .catch(err => res.status(500).send('db error'));
 
-    return res.status(200).json(newUserName);
 });
 
 router.post("/name/view", (req, res) => {
@@ -62,10 +61,9 @@ router.post("/address/add", (req, res) => {
     });
     newAddress
         .save()
-        .then(userName => res.json(userName))
-        .catch(err => console.log(err));
+        .then((data) => res.status(200).json(data.toJSON()))
+        .catch(err => res.status(500).send('db error'));
 
-    return res.status(200).json(newAddress);
 });
 
 // Contact info add
@@ -82,10 +80,9 @@ router.post("/contact/add", (req, res) => {
     });
     newContact
         .save()
-        .then(userName => res.json(userName))
-        .catch(err => console.log(err));
+        .then((data) => res.status(200).json(data.toJSON()))
+        .catch(err => res.status(500).send('db error'));
 
-    return res.status(200).json(newContact);
 });
 
 // disease info add
@@ -124,10 +121,9 @@ router.post("/disease/add", (req, res) => {
     });
     newDisease
         .save()
-        .then(userName => res.json(userName))
-        .catch(err => console.log(err));
+        .then((data) => res.status(200).json(data.toJSON()))
+        .catch(err => res.status(500).send('db error'));
 
-    return res.status(200).json(newDisease);
 });
 
 // disease info add
@@ -160,10 +156,9 @@ router.post("/health/add", (req, res) => {
     });
     newHealth
         .save()
-        .then(userName => res.json(userName))
-        .catch(err => console.log(err));
+        .then((data) => res.status(200).json(data.toJSON()))
+        .catch(err => res.status(500).send('db error'));
 
-    return res.status(200).json(newHealth);
 });
 
 module.exports = router;
