@@ -18,6 +18,20 @@ const UserNameSchema = new Schema({
     family: {
         type: String,
         required: true
-    }
+    },
+    birthday: {
+        type: Date,
+        min: '1920-01-01',
+    },
+    gender: {
+        type: Number,
+        min: 0,
+        max: 1,
+        required: false,
+    },
+    national: {
+        type: String,
+        required: false,
+    },
 });
 module.exports = UserName = mongoose.model("user_name", UserNameSchema);
