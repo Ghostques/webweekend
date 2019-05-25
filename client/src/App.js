@@ -11,7 +11,8 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import HomePage from "./components/home/HomePage";
+import BaseInformationPage from "./components/SettingsPages/BaseInformationPage";
+import AddressInformationPage from "./components/SettingsPages/AddressInformationPage";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -35,7 +36,8 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/home" component={HomePage} />
+              <Route exact path="/personal" component={BaseInformationPage} />
+              <Route exact path="/address" component={AddressInformationPage} />
             </div>
           </div>
         </Router>

@@ -3,13 +3,13 @@ import {Form, Input, Row, Button, Card, Layout, Col,} from 'antd';
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addUser} from "../../actions/userActions";
+import {baseInfo} from "../../actions/userActions";
 
-class HomePage extends Component {
+class BaseInformationPage extends Component {
   constructor() {
     super();
     this.state = {
-      login: "",
+      _id:"5ce96fffddf3f3272e0ffb5c",
       first_name: "",
       second_name: "",
       family: "",
@@ -25,11 +25,11 @@ class HomePage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   onSubmit = e => {
-    const { form, addUser} = this.props;
+    const { form, baseInfo} = this.props;
 
     e.preventDefault();
     form.validateFields((err, values) => {
-      addUser({
+      baseInfo({
         ...values
       });
     });
@@ -106,7 +106,7 @@ class HomePage extends Component {
   }
 }
 
-HomePage.propTypes = {
+BaseInformationPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
@@ -124,7 +124,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addUser }
-)(Form.create()(HomePage));
-
-// export default Form.create()(HomePage);
+  { baseInfo }
+)(Form.create()(BaseInformationPage));
