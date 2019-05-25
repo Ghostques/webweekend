@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 const users = require("./routes/api/users");
+const user_name = require("./routes/api/user_name");
 const adminSeeder = require("./seed/adminSeeder");
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use("/api/users", users);
+app.use("/api/user_name", user_name);
 
 const port = process.env.PORT || 5000;
 
