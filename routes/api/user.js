@@ -13,31 +13,39 @@ const validateNameInput = require("../../validation/name");
 // User Name add
 router.post("/name/add", (req, res) => {
     const {errors, isValid} = validateNameInput(req.body);
+    const id = req.body.id;
 
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
-    const newUserName = new UserName({
-        _id: req.body._id,
-        first_name: req.body.first_name,
-        second_name: req.body.second_name,
-        family: req.body.family,
-        birthday: req.body.birthday,
-        gender: req.body.gender,
-        national: req.body.national,
-    });
-    newUserName
-        .save()
-        .then((data) => res.status(200).json(data.toJSON()))
-        .catch(err => res.status(500).send('db error'));
+    User.findById( id ).then(user => {
+        if (!user) {
+            errors.name = "Пользователь не найден";
+            return res.status(404).json(errors);
+        }
+        if (!isValid) {
+            return res.status(400).json(errors);
+        }
+        const newUserName = new UserName({
+            id: req.body.id,
+            first_name: req.body.first_name,
+            second_name: req.body.second_name,
+            family: req.body.family,
+            birthday: req.body.birthday,
+            gender: req.body.gender,
+            national: req.body.national,
+        });
+        newUserName
+            .save()
+            .then((data) => res.status(200).json(data.toJSON()))
+            .catch(err => res.status(500).send('db error'));
+    })
+        .catch(err => res.status(422).send('User Not Found'))
 
 });
 
 router.post("/name/view", (req, res) => {
 
-    const _id = req.body._id;
+    const id = req.body.id;
 
-    UserName.findOne({ _id }).then(userName => {
+    UserName.findOne({ id }).then(userName => {
         if (!userName) {
 
             return res.status(404).json("Пользователь не найден");
@@ -51,7 +59,7 @@ router.post("/name/view", (req, res) => {
 // Address add
 router.post("/address/add", (req, res) => {
     const newAddress = new Address({
-        _id: req.body._id,
+        id: req.body.id,
         address_index: req.body.address_index,
         city: req.body.city,
         street: req.body.street,
@@ -69,7 +77,7 @@ router.post("/address/add", (req, res) => {
 // Contact info add
 router.post("/contact/add", (req, res) => {
     const newContact = new Contact({
-        _id: req.body._id,
+        id: req.body.id,
         phone: req.body.phone,
         email: req.body.email,
         social: req.body.social,
@@ -88,7 +96,7 @@ router.post("/contact/add", (req, res) => {
 // disease info add
 router.post("/disease/add", (req, res) => {
     const newDisease = new Disease({
-        _id: req.body._id,
+        id: req.body.id,
         opuhali: req.body.opuhali,
         diabet: req.body.diabet,
         davlenie: req.body.davlenie,
@@ -129,7 +137,7 @@ router.post("/disease/add", (req, res) => {
 // disease info add
 router.post("/health/add", (req, res) => {
     const newHealth = new Health({
-        _id: req.body._id,
+        id: req.body.id,
         childbearing: req.body.childbearing,
         childbearing_count: req.body.childbearing_count,
         blood: req.body.blood,
