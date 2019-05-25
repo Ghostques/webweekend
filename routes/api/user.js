@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const UserName = require("../../models/UserName");
+const Address = require("../../models/Adress");
+const Contact = require("../../models/Contact");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
@@ -8,32 +10,63 @@ const validateNameInput = require("../../validation/name");
 
 // User Name add
 router.post("/name/add", (req, res) => {
-    const { errors, isValid } = validateNameInput(req.body);
+    const {errors, isValid} = validateNameInput(req.body);
 
     if (!isValid) {
         return res.status(400).json(errors);
     }
-
-    // User.findOne({name: req.body.login}).then(userName => {
-
-        const newUserName = new UserName({
-            login: req.body.login,
-            first_name: req.body.first_name,
-            second_name: req.body.second_name,
-            family: req.body.family,
-            birthday: req.body.birthday,
-            gender: req.body.gender,
-            national: req.body.national,
-        });
-
-        newUserName
-            .save()
-            .then(userName => res.json(userName))
-            .catch(err => console.log(err));
-
-    // });
+    const newUserName = new UserName({
+        login: req.body.login,
+        first_name: req.body.first_name,
+        second_name: req.body.second_name,
+        family: req.body.family,
+        birthday: req.body.birthday,
+        gender: req.body.gender,
+        national: req.body.national,
+    });
+    newUserName
+        .save()
+        .then(userName => res.json(userName))
+        .catch(err => console.log(err));
 
     return res.status(200).json(newUserName);
+});
+// Address add
+router.post("/address/add", (req, res) => {
+    const newAddress = new Address({
+        login: req.body.login,
+        address_index: req.body.address_index,
+        city: req.body.city,
+        street: req.body.street,
+        house: req.body.house,
+        house_index: req.body.house_index,
+        flat: req.body.flat,
+    });
+    newAddress
+        .save()
+        .then(userName => res.json(userName))
+        .catch(err => console.log(err));
+
+    return res.status(200).json(newAddress);
+});
+// Contact info add
+router.post("/contact/add", (req, res) => {
+    const newContact = new Contact({
+        login: req.body.login,
+        phone: req.body.phone,
+        email: req.body.email,
+        social: req.body.social,
+        skype: req.body.skype,
+        telegram: req.body.telegram,
+        other_name: req.body.other_name,
+        other_link: req.body.other_link,
+    });
+    newContact
+        .save()
+        .then(userName => res.json(userName))
+        .catch(err => console.log(err));
+
+    return res.status(200).json(newContact);
 });
 
 module.exports = router;
