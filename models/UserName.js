@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserNameSchema = new Schema({
-    login: {
+    id: {
       type: String,
       required: true,
+        unique: true,
     },
     first_name: {
         type: String,
@@ -27,11 +28,11 @@ const UserNameSchema = new Schema({
         type: Number,
         min: 0,
         max: 1,
-        required: false,
+        required: true,
     },
     national: {
         type: String,
-        required: false,
+        required: true,
     },
 });
 module.exports = UserName = mongoose.model("user_name", UserNameSchema);

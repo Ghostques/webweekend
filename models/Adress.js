@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AddressSchema = new Schema({
-    login: {
+    id: {
         type: String,
         required: true,
         unique: true,
@@ -27,7 +27,7 @@ const AddressSchema = new Schema({
         type: String,
         required: false,
     },
-    flat: {
+    flat_number: {
         type: Number,
         required: false,
     },

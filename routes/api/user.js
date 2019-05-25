@@ -16,7 +16,7 @@ router.post("/name/add", (req, res) => {
         return res.status(400).json(errors);
     }
     const newUserName = new UserName({
-        login: req.body.login,
+        id: req.body.id,
         first_name: req.body.first_name,
         second_name: req.body.second_name,
         family: req.body.family,
@@ -31,16 +31,35 @@ router.post("/name/add", (req, res) => {
 
     return res.status(200).json(newUserName);
 });
+
+
+router.post("/name/view", (req, res) => {
+
+    const id = req.body.id;
+
+    UserName.findOne({ id }).then(userName => {
+        if (!userName) {
+
+            return res.status(404).json("Пользователь не найден");
+        }
+
+        return res.status(200).json(userName);
+
+    });
+});
+
+
+
 // Address add
 router.post("/address/add", (req, res) => {
     const newAddress = new Address({
-        login: req.body.login,
+        id: req.body.id,
         address_index: req.body.address_index,
         city: req.body.city,
         street: req.body.street,
         house: req.body.house,
         house_index: req.body.house_index,
-        flat: req.body.flat,
+        flat_number: req.body.flat_number,
     });
     newAddress
         .save()
@@ -52,7 +71,7 @@ router.post("/address/add", (req, res) => {
 // Contact info add
 router.post("/contact/add", (req, res) => {
     const newContact = new Contact({
-        login: req.body.login,
+        id: req.body.id,
         phone: req.body.phone,
         email: req.body.email,
         social: req.body.social,
