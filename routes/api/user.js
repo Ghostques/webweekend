@@ -3,6 +3,8 @@ const router = express.Router();
 const UserName = require("../../models/UserName");
 const Address = require("../../models/Adress");
 const Contact = require("../../models/Contact");
+const Disease = require("../../models/Disease");
+const Health = require("../../models/Health");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
@@ -32,7 +34,6 @@ router.post("/name/add", (req, res) => {
     return res.status(200).json(newUserName);
 });
 
-
 router.post("/name/view", (req, res) => {
 
     const _id = req.body._id;
@@ -47,8 +48,6 @@ router.post("/name/view", (req, res) => {
 
     });
 });
-
-
 
 // Address add
 router.post("/address/add", (req, res) => {
@@ -68,6 +67,7 @@ router.post("/address/add", (req, res) => {
 
     return res.status(200).json(newAddress);
 });
+
 // Contact info add
 router.post("/contact/add", (req, res) => {
     const newContact = new Contact({
@@ -86,6 +86,84 @@ router.post("/contact/add", (req, res) => {
         .catch(err => console.log(err));
 
     return res.status(200).json(newContact);
+});
+
+// disease info add
+router.post("/disease/add", (req, res) => {
+    const newDisease = new Disease({
+        _id: req.body._id,
+        opuhali: req.body.opuhali,
+        diabet: req.body.diabet,
+        davlenie: req.body.davlenie,
+        heart: req.body.heart,
+        sosudi: req.body.sosudi,
+        blood_svert: req.body.blood_svert,
+        blood_nasled: req.body.blood_nasled,
+        pochki: req.body.pochki,
+        shitovidka: req.body.shitovidka,
+        autoimmun: req.body.autoimmun,
+        nervi: req.body.nervi,
+        vich: req.body.vich,
+        gepatit: req.body.gepatit,
+        sifilis: req.body.sifilis,
+        tuberculez: req.body.tuberculez,
+        infekcia: req.body.infekcia,
+        gormoni: req.body.gormoni,
+        transplantacia: req.body.transplantacia,
+        rodst_leikimia: req.body.rodst_leikimia,
+        rodst_rak: req.body.rodst_rak,
+        rodst_icob: req.body.rodst_icob,
+        spid: req.body.spid,
+        poniatno: req.body.poniatno,
+        spid_contact: req.body.spid_contact,
+        anastesia_make: req.body.anastesia_make,
+        react: req.body.react,
+        react_type: req.body.react_type,
+        rodst: req.body.rodst,
+        other_moment: req.body.other_moment,
+    });
+    newDisease
+        .save()
+        .then(userName => res.json(userName))
+        .catch(err => console.log(err));
+
+    return res.status(200).json(newDisease);
+});
+
+// disease info add
+router.post("/health/add", (req, res) => {
+    const newHealth = new Health({
+        _id: req.body._id,
+        childbearing: req.body.childbearing,
+        childbearing_count: req.body.childbearing_count,
+        blood: req.body.blood,
+        factor: req.body.factor,
+        transfusion: req.body.transfusion,
+        transfusion_what: req.body.transfusion_what,
+        transfusion_date: req.body.transfusion_date,
+        transfusion_count: req.body.transfusion_count,
+        allergy: req.body.allergy,
+        allergy_type: req.body.allergy_type,
+        height: req.body.height,
+        weight: req.body.weight,
+        smoke: req.body.smoke,
+        alcohol: req.body.alcohol,
+        donor: req.body.donor,
+        donor_out: req.body.donor_out,
+        donor_out_couse: req.body.donor_out_couse,
+        medical: req.body.medical,
+        medical_type: req.body.medical_type,
+        operation: req.body.operation,
+        operation_type: req.body.operation_type,
+        fever: req.body.fever,
+        crash: req.body.crash,
+    });
+    newHealth
+        .save()
+        .then(userName => res.json(userName))
+        .catch(err => console.log(err));
+
+    return res.status(200).json(newHealth);
 });
 
 module.exports = router;
