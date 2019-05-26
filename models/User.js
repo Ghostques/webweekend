@@ -13,6 +13,10 @@ const UserSchema = new Schema({
   role: {
     type: String,
     default: "user"
+  },
+  statistics: {
+    type: Boolean,
+    default: false,
   }
 });
 module.exports = User = mongoose.model("users", UserSchema);

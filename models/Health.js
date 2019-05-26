@@ -10,7 +10,6 @@ const HealthSchema = new Schema({
     childbearing: {
         type: Boolean,
         required: true,
-        unique: true,
     },
     childbearing_count: {
         type: Number,

@@ -266,39 +266,66 @@ router.post("/health/add", (req, res) => {
             return res.status(404).json(errors);
         }
 
-        const newHealth = new Health({
-            id: req.body.id,
-            childbearing: req.body.childbearing,
-            childbearing_count: req.body.childbearing_count,
-            blood: req.body.blood,
-            factor: req.body.factor,
-            transfusion: req.body.transfusion,
-            transfusion_what: req.body.transfusion_what,
-            transfusion_date: req.body.transfusion_date,
-            transfusion_count: req.body.transfusion_count,
-            allergy: req.body.allergy,
-            allergy_type: req.body.allergy_type,
-            height: req.body.height,
-            weight: req.body.weight,
-            smoke: req.body.smoke,
-            alcohol: req.body.alcohol,
-            donor: req.body.donor,
-            donor_out: req.body.donor_out,
-            donor_out_couse: req.body.donor_out_couse,
-            medical: req.body.medical,
-            medical_type: req.body.medical_type,
-            operation: req.body.operation,
-            operation_type: req.body.operation_type,
-            fever: req.body.fever,
-            crash: req.body.crash,
-        });
-        newHealth
-            .save()
-            .then((data) => res.status(200).json(data.toJSON()))
-            .catch(err => res.status(500).send(err));
+        Health.findOne({id}).then(health => {
+            if (!health) {
+                const newHealth = new Health({
+                    id: req.body.id,
+                    childbearing: req.body.childbearing,
+                    childbearing_count: req.body.childbearing_count,
+                    blood: req.body.blood,
+                    factor: req.body.factor,
+                    transfusion: req.body.transfusion,
+                    transfusion_what: req.body.transfusion_what,
+                    transfusion_date: req.body.transfusion_date,
+                    transfusion_count: req.body.transfusion_count,
+                    allergy: req.body.allergy,
+                    allergy_type: req.body.allergy_type,
+                    height: req.body.height,
+                    weight: req.body.weight,
+                    smoke: req.body.smoke,
+                    alcohol: req.body.alcohol,
+                    donor: req.body.donor,
+                    donor_out: req.body.donor_out,
+                    donor_out_couse: req.body.donor_out_couse,
+                    medical: req.body.medical,
+                    medical_type: req.body.medical_type,
+                    operation: req.body.operation,
+                    operation_type: req.body.operation_type,
+                    fever: req.body.fever,
+                    crash: req.body.crash,
+                });
+                newHealth
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            } else {
+                health.childbearing = req.body.childbearing;
+                health.childbearing_count = req.body.childbearing_count;
+                health.blood = req.body.blood;
+                health.factor = req.body.factor;
+                health.transfusion = req.body.transfusion;
+                health.transfusion_what = req.body.transfusion_what;
+                health.transfusion_date = req.body.transfusion_date;
+                health.transfusion_count = req.body.transfusion_count;
+                health.allergy = req.body.allergy;
+                health.allergy_type = req.body.allergy_type;
+                health.height = req.body.height;
+                health.weight = req.body.weight;
+                health.smoke = req.body.smoke;
+                health.alcohol = req.body.alcohol;
+                health.donor = req.body.donor;
+                health.donor_out = req.body.donor_out;
+                health.donor_out_couse = req.body.donor_out_couse;
+                health.medical = req.body.medical;
+                health.medical_type = req.body.medical_type;
+                health.operation = req.body.operation;
+                health.operation_type = req.body.operation_type;
+                health.fever = req.body.fever;
+                health.crash = req.body.crash;
+            }
+        })
     })
         .catch(err => res.status(422).send('User Not Found'));
-
 });
 
 module.exports = router;

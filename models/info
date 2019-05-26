@@ -1,0 +1,81 @@
+Address:{
+    id - id челика
+    address_index - почтовый индекс - цифры
+    city - город, строка
+    street - улица, строка
+    house - дом, цифры
+    house_index - индекс дома, строка
+    flat_number - номер кв, цифры
+    }
+
+Contact:{
+    id - id челика
+    phone - телефон, строка
+    email - почта, строка
+    social - социалка, строка ( линк)
+    skype - скайп, строка
+    telegram - телега, строка
+    other_name - другое, название, строка,
+    other_link - другое, ссылка, строка
+}
+
+Disease: {
+    id - id челика
+    opuhali - опухали, булеан
+    diabet - диабет, булеан
+    davlenie - давление, булеан
+    heart - болезни сердца, булеан
+    sosudi - сосуды, булеан
+    blood_svert - сверт. крови, булеан
+    blood_nasled - наследственное крови, булеан
+    pochki - почки, булеан
+    shitovidka - щитовидка, булеан
+    autoimmun - аутоиммунные, булеан
+    nervi - нервная система, булеан
+    psih - психические, булеан
+    vich - ВИЧ, булеан
+    gepatit - гепатит, булеан
+    sifilis - сифилис, булеан
+    tuberculez - туберкулез, булеан
+    infekcia - инфекции, булеан
+    gormoni - лечение гормонами, булеан
+    transplantacia - трансплантация, булеан
+    rodst_leikimia - родств. лейкемия, булеан
+    rodst_rak - рак родств., булеан
+    rodst_icob - Якоб, булеан
+    spid - СПИД инфо, булеан
+    poniatno - понятно про спид, булеан
+    spid_contact - контакт со спидом, булеан
+    anastesia_make - общая анастезия, булеан
+    react - реакция, булеан
+    react_type - тип реакции, строка
+    rodst - у родственников, булеан
+    other_moment - другие моменты, строка
+}
+
+Health: {
+    id - id челика
+    childbearing - беременность, булеан
+    childbearing_count - кол-во бер., цифра
+    blood - группа крови, цифра
+    factor - резус-факторЮ строка
+    transfusion - переливание крови, булеан
+    transfusion_what - что переливали, строка
+    transfusion_date - когда переливали(год), цифра
+    transfusion_count - сколько раз, цифра
+    allergy - аллергия, булеан
+    allergy_type - на что, строка
+    height - рост(см), цифра
+    weight - вес(кг), цифра
+    smoke - куришь, булеан
+    alcohol - часто пьешь, булеан
+    donor - донорствовал, булеан
+    donor_out - отстраняли, булеан
+    donor_out_couse - почему отстранили, строка
+    medical - на таблетках, булеан
+    medical_type - на каких, строка
+    operation - операции в последний год, булеан
+    operation_type - какие, строка
+    fever - лихорадки, булеан
+    crash - аварии, булеан
+}

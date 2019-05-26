@@ -51,6 +51,10 @@ const DiseaseSchema = new Schema({
         type: Boolean,
         require: true,
     },
+    psih: {
+        type: Boolean,
+        require: true,
+    },
     vich: {
         type: Boolean,
         require: true,

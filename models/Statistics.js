@@ -6,13 +6,28 @@ const StatisticsSchema = new Schema({
         type: String,
         required: false,
     },
+    info_from_other: {
+        type: String,
+        required: false,
+        default: "",
+    },
     info_when: {
         type: String,
         required: false,
     },
+    info_when_other: {
+        type: String,
+        required: false,
+        default: "",
+    },
     motivation: {
         type: String,
         required: true
+    },
+    motivation_other: {
+        type: String,
+        required: true,
+        default: ""
     },
     relation: {
         type: String,
