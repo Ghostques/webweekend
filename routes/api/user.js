@@ -20,22 +20,42 @@ router.post("/name/add", (req, res) => {
             errors.name = "Пользователь не найден";
             return res.status(404).json(errors);
         }
-        if (!isValid) {
-            return res.status(400).json(errors);
-        }
-        const newUserName = new UserName({
-            id: req.body.id,
-            first_name: req.body.first_name,
-            second_name: req.body.second_name,
-            family: req.body.family,
-            birthday: req.body.birthday,
-            gender: req.body.gender,
-            national: req.body.national,
-        });
-        newUserName
-            .save()
-            .then((data) => res.status(200).json(data.toJSON()))
-            .catch(err => res.status(500).send(err));
+        UserName.findOne({id}).then(userName => {
+            if (!userName) {
+                if (!isValid) {
+                    return res.status(400).json(errors);
+                }
+                const newUserName = new UserName({
+                    id: req.body.id,
+                    first_name: req.body.first_name,
+                    second_name: req.body.second_name,
+                    family: req.body.family,
+                    birthday: req.body.birthday,
+                    gender: req.body.gender,
+                    national: req.body.national,
+                });
+                newUserName
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            } else {
+                if (!isValid) {
+                    return res.status(400).json(errors);
+                }
+                userName.first_name = req.body.first_name;
+                userName.second_name = req.body.second_name;
+                userName.family = req.body.family;
+                userName.birthday = req.body.birthday;
+                userName.gender = req.body.gender;
+                userName.national = req.body.national;
+                userName
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            }
+
+
+        })
     })
         .catch(err => res.status(422).send('User Not Found'));
 
