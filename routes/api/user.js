@@ -17,7 +17,7 @@ router.post("/name/add", (req, res) => {
 
     User.findById(id).then(user => {
         if (!user) {
-            errors.name = "Пользователь не найден";
+            errors.user = "Пользователь не найден";
             return res.status(404).json(errors);
         }
         UserName.findOne({id}).then(userName => {
@@ -79,9 +79,11 @@ router.post("/name/view", (req, res) => {
 // Address add
 router.post("/address/add", (req, res) => {
 
+    const id = req.body.id;
+
     User.findById(id).then(user => {
         if (!user) {
-            errors.name = "Пользователь не найден";
+            errors.user = "Пользователь не найден";
             return res.status(404).json(errors);
         }
 
@@ -112,7 +114,7 @@ router.post("/address/add", (req, res) => {
                     .save()
                     .then((data) => res.status(200).json(data.toJSON()))
                     .catch(err => res.status(500).send(err));
-            };
+            }
         });
     })
         .catch(err => res.status(422).send('User Not Found'));
@@ -122,87 +124,145 @@ router.post("/address/add", (req, res) => {
 // Contact info add
 router.post("/contact/add", (req, res) => {
 
+    const id = req.body.id;
+
     User.findById(id).then(user => {
         if (!user) {
-            errors.name = "Пользователь не найден";
+            errors.user = "Пользователь не найден";
             return res.status(404).json(errors);
         }
+        Contact.findOne({id}).then(contact => {
+            if (!contact) {
+                const newContact = new Contact({
+                    id: req.body.id,
+                    phone: req.body.phone,
+                    email: req.body.email,
+                    social: req.body.social,
+                    skype: req.body.skype,
+                    telegram: req.body.telegram,
+                    other_name: req.body.other_name,
+                    other_link: req.body.other_link,
+                });
+                newContact
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            } else {
+                contact.phone = req.body.phone;
+                contact.email = req.body.email;
+                contact.social = req.body.social;
+                contact.skype = req.body.skype;
+                contact.telegram = req.body.telegram;
+                contact.other_name = req.body.other_name;
+                contact.other_link = req.body.other_link;
+                contact
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            }
+        })
 
-        const newContact = new Contact({
-            id: req.body.id,
-            phone: req.body.phone,
-            email: req.body.email,
-            social: req.body.social,
-            skype: req.body.skype,
-            telegram: req.body.telegram,
-            other_name: req.body.other_name,
-            other_link: req.body.other_link,
-        });
-        newContact
-            .save()
-            .then((data) => res.status(200).json(data.toJSON()))
-            .catch(err => res.status(500).send(err));
     })
         .catch(err => res.status(422).send('User Not Found'));
-
 });
 
 // disease info add
 router.post("/disease/add", (req, res) => {
 
+    const id = req.body.id;
+
     User.findById(id).then(user => {
         if (!user) {
-            errors.name = "Пользователь не найден";
+            errors.user = "Пользователь не найден";
             return res.status(404).json(errors);
         }
+        Disease.findOne({id}).then(disease => {
+            if (!disease) {
+                const newDisease = new Disease({
+                    id: req.body.id,
+                    opuhali: req.body.opuhali,
+                    diabet: req.body.diabet,
+                    davlenie: req.body.davlenie,
+                    heart: req.body.heart,
+                    sosudi: req.body.sosudi,
+                    blood_svert: req.body.blood_svert,
+                    blood_nasled: req.body.blood_nasled,
+                    pochki: req.body.pochki,
+                    shitovidka: req.body.shitovidka,
+                    autoimmun: req.body.autoimmun,
+                    nervi: req.body.nervi,
+                    vich: req.body.vich,
+                    gepatit: req.body.gepatit,
+                    sifilis: req.body.sifilis,
+                    tuberculez: req.body.tuberculez,
+                    infekcia: req.body.infekcia,
+                    gormoni: req.body.gormoni,
+                    transplantacia: req.body.transplantacia,
+                    rodst_leikimia: req.body.rodst_leikimia,
+                    rodst_rak: req.body.rodst_rak,
+                    rodst_icob: req.body.rodst_icob,
+                    spid: req.body.spid,
+                    poniatno: req.body.poniatno,
+                    spid_contact: req.body.spid_contact,
+                    anastesia_make: req.body.anastesia_make,
+                    react: req.body.react,
+                    react_type: req.body.react_type,
+                    rodst: req.body.rodst,
+                    other_moment: req.body.other_moment,
+                });
+                newDisease
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            } else {
 
-        const newDisease = new Disease({
-            id: req.body.id,
-            opuhali: req.body.opuhali,
-            diabet: req.body.diabet,
-            davlenie: req.body.davlenie,
-            heart: req.body.heart,
-            sosudi: req.body.sosudi,
-            blood_svert: req.body.blood_svert,
-            blood_nasled: req.body.blood_nasled,
-            pochki: req.body.pochki,
-            shitovidka: req.body.shitovidka,
-            autoimmun: req.body.autoimmun,
-            nervi: req.body.nervi,
-            vich: req.body.vich,
-            gepatit: req.body.gepatit,
-            sifilis: req.body.sifilis,
-            tuberculez: req.body.tuberculez,
-            infekcia: req.body.infekcia,
-            gormoni: req.body.gormoni,
-            transplantacia: req.body.transplantacia,
-            rodst_leikimia: req.body.rodst_leikimia,
-            rodst_rak: req.body.rodst_rak,
-            rodst_icob: req.body.rodst_icob,
-            spid: req.body.spid,
-            poniatno: req.body.poniatno,
-            spid_contact: req.body.spid_contact,
-            anastesia_make: req.body.anastesia_make,
-            react: req.body.react,
-            react_type: req.body.react_type,
-            rodst: req.body.rodst,
-            other_moment: req.body.other_moment,
-        });
-        newDisease
-            .save()
-            .then((data) => res.status(200).json(data.toJSON()))
-            .catch(err => res.status(500).send(err));
+                disease.opuhali = req.body.opuhali;
+                disease.diabet = req.body.diabet;
+                disease.davlenie = req.body.davlenie;
+                disease.heart = req.body.heart;
+                disease.sosudi = req.body.sosudi;
+                disease.blood_svert = req.body.blood_svert;
+                disease.blood_nasled = req.body.blood_nasled;
+                disease.pochki = req.body.pochki;
+                disease.shitovidka = req.body.shitovidka;
+                disease.autoimmun = req.body.autoimmun;
+                disease.nervi = req.body.nervi;
+                disease.vich = req.body.vich;
+                disease.gepatit = req.body.gepatit;
+                disease.sifilis = req.body.sifilis;
+                disease.tuberculez = req.body.tuberculez;
+                disease.infekcia = req.body.infekcia;
+                disease.gormoni = req.body.gormoni;
+                disease.transplantacia = req.body.transplantacia;
+                disease.rodst_leikimia = req.body.rodst_leikimia;
+                disease.rodst_rak = req.body.rodst_rak;
+                disease.rodst_icob = req.body.rodst_icob;
+                disease.spid = req.body.spid;
+                disease.poniatno = req.body.poniatno;
+                disease.spid_contact = req.body.spid_contact;
+                disease.anastesia_make = req.body.anastesia_make;
+                disease.react = req.body.react;
+                disease.react_type = req.body.react_type;
+                disease.rodst = req.body.rodst;
+                disease.other_moment = req.body.other_moment;
+                disease
+                    .save()
+                    .then((data) => res.status(200).json(data.toJSON()))
+                    .catch(err => res.status(500).send(err));
+            }
+        })
     })
         .catch(err => res.status(422).send('User Not Found'));
-
 });
 
 // disease info add
 router.post("/health/add", (req, res) => {
 
+    const id = req.body.id;
+
     User.findById(id).then(user => {
         if (!user) {
-            errors.name = "Пользователь не найден";
+            errors.user = "Пользователь не найден";
             return res.status(404).json(errors);
         }
 
