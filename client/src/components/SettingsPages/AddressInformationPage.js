@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Form, Input, Row, Button, Card, Layout, Col,} from 'antd';
+import {Form, Input, Row, Button, Card, Layout, Col, notification, Icon,} from 'antd';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -19,41 +19,40 @@ class AddressInformationPage extends Component {
               <Form>
                 <Form.Item>
                   <Row type="flex" justify="center" align="middle">
-                    <span style={{fontSize: '30px'}}>User address settings</span>
+                    <span style={{fontSize: '30px'}}>Контактные данные</span>
                   </Row>
                 </Form.Item>
-                <Form.Item label="city:">
+                <Form.Item label="Город:">
                   {getFieldDecorator('city', {
-                    rules: [{required: true, message: 'Введите city!'}]
-                  })(<Input placeholder={'city'}/>)}
+                    rules: [{required: true, message: 'Укажите город!'}]
+                  })(<Input placeholder={'Город'}/>)}
                 </Form.Item>
-                <Form.Item label="street:">
+                <Form.Item label="Улица:">
                   {getFieldDecorator('street', {
-                    rules: [{required: true, message: 'Введите street!'}]
-                  })(<Input placeholder={'street'}/>)}
+                    rules: [{required: true, message: 'Укажите улицу!'}]
+                  })(<Input placeholder={'Улица'}/>)}
                 </Form.Item>
-                <Form.Item label="house:">
+                <Form.Item label="Номер дома:">
                   {getFieldDecorator('house', {
-                    rules: [{required: true, message: 'Введите house!'}]
-                  })(<Input placeholder={'house'}/>)}
+                    rules: [{required: true, message: 'Укажите номер дома!'}]
+                  })(<Input placeholder={'Номер дома'}/>)}
                 </Form.Item>
-                <Form.Item label="flat_number:">
-                  {getFieldDecorator('flat_number')(<Input placeholder={'flat_number'}/>)}
+                <Form.Item label="Номер квартиры:">
+                  {getFieldDecorator('flat_number')(<Input placeholder={'Номер квартиры'}/>)}
                 </Form.Item>
-                <Form.Item label="address_index:">
-                  {getFieldDecorator('address_index')(<Input placeholder={'address_index'}/>)}
+                <Form.Item label="Корпус:">
+                  {getFieldDecorator('house_index')(<Input placeholder={'Корпус'}/>)}
                 </Form.Item>
-                <Form.Item label="house_index:">
-                  {getFieldDecorator('house_index')(<Input placeholder={'house_index'}/>)}
+                <Form.Item label="Почтовый индекс:">
+                  {getFieldDecorator('address_index')(<Input placeholder={'Почтовый индекс'}/>)}
                 </Form.Item>
-
                 <Form.Item>
                   <Button type="primary" onClick={this.onSubmit}>
-                    Register
+                    Отправить анкету
                   </Button>
-                  <Link to={'/'}>
+                  <Link to={'/login'}>
                     <Button type="default" style={{marginLeft: '8px'}}>
-                      Cancel
+                      Назад
                     </Button>
                   </Link>
                 </Form.Item>
@@ -65,10 +64,21 @@ class AddressInformationPage extends Component {
     );
   }
   onSubmit = e => {
-    const { form, addressInfo, auth} = this.props;
-    console.log(auth.user.id);
+    const { form, addressInfo, auth, history} = this.props;
+    const openNotification = (e) => {
+      if (e===null) {
+        notification.open({
+          message: 'Оповещение',
+          description:
+            'Анкета успешно отправлена',
+          icon: <Icon type="heart" style={{ color: '#108ee9' }} />,
+        });
+        history.push('/')
+      }else return null
+    };
     e.preventDefault();
     form.validateFields((err, values) => {
+      openNotification(err)
       addressInfo({
         id:auth.user.id,
         ...values
@@ -78,7 +88,6 @@ class AddressInformationPage extends Component {
 }
 
 AddressInformationPage.propTypes = {
-  loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };

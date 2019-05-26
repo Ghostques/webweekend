@@ -26,19 +26,13 @@ class Landing extends Component {
                 </div>
               ) : (
                 <div className="col-md-12 text-center">
-                  <h1 className="display-3 mb-4">{`Привет ${
-                    auth.user.role
-                  } `}</h1>
-                  <h1 className="display-3 mb-4">{`по имени ${
-                    auth.user.name
-                  } `}
-                  </h1>
-                  <Link to="/address" className="btn btn-lg btn-light">
-                    address settings
-                  </Link>
                   <Link to="/personal" className="btn btn-lg btn-light">
-                    personal settings
+                    Персональные данные
                   </Link>
+                  <Link to="/address" className="btn btn-lg btn-light">
+                    Контактные данные
+                  </Link>
+
                 </div>
 
               )}

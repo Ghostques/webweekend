@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from 'moment';
-import {Form, Input, Row, Button, Card, Layout, Col, DatePicker, Select} from 'antd';
+import {Form, Input, Row, Button, Card, Layout, Col, DatePicker, Select, notification, Icon} from 'antd';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -11,7 +11,7 @@ class BaseInformationPage extends Component {
   render() {
     const { auth} = this.props;
     const {getFieldDecorator} = this.props.form;
-    const dateFormat = 'YYYY-MM-DD';
+    const dateFormat = 'DD-MM-YYYY';
 
     return (
       <Layout.Content>
@@ -44,6 +44,7 @@ class BaseInformationPage extends Component {
                     rules: [{required: true, message: 'Укажите свою национальноасть!'}]
                   })(<Select
                     showSearch
+                    initialValue={''}
                     placeholder="Укажите свою национальноасть"
                     optionFilterProp="children"
                   >
@@ -66,8 +67,8 @@ class BaseInformationPage extends Component {
                     <DatePicker
                       style={{width:'100%'}}
                       placeholder="Укажите дату рождения"
-                      defaultValue={moment('2015/01/01', dateFormat)}
                       format={dateFormat}
+                      initialValue={''}
                     />
                   )}
                 </Form.Item>
@@ -79,6 +80,7 @@ class BaseInformationPage extends Component {
                     showSearch
                     placeholder="Укажите свой пол"
                     optionFilterProp="children"
+                    initialValue={''}
                   >
                     <Select.Option value="1">Мужской</Select.Option>
                     <Select.Option value="0">Женский</Select.Option>
@@ -103,11 +105,22 @@ class BaseInformationPage extends Component {
     );
   }
   onSubmit = e => {
-    const { form, baseInfo, auth} = this.props;
+    const { form, baseInfo, auth,history} = this.props;
+    const openNotification = (e) => {
+      if (e===null) {
+      notification.open({
+        message: 'Оповещение',
+        description:
+          'Анкета успешно отправлена',
+        icon: <Icon type="heart" style={{ color: '#108ee9' }} />,
+      });
+      history.push('/')
+      }else return null
+    };
 
     e.preventDefault();
     form.validateFields((err, values) => {
-      console.log(values.gender);
+      openNotification(err);
       baseInfo({
         id:auth.user.id,
         ...values
@@ -117,7 +130,6 @@ class BaseInformationPage extends Component {
 }
 
 BaseInformationPage.propTypes = {
-  loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
