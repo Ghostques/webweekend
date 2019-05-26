@@ -1,41 +1,14 @@
 import React, { Component } from "react";
 import {Form, Input, Row, Button, Card, Layout, Col,} from 'antd';
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addressInfo} from "../../actions/userActions";
 
-class BaseInformationPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      _id:"5ce96fffddf3f3272e0ffb5c",
-      city: "",
-      street: "",
-      house: "",
-      flat_number: "",
-      address_index: "",
-      house_index: "",
-    };
-  }
+class AddressInformationPage extends Component {
 
-
-
-  onChange = e => {
-    this.history.push('/home');
-  };
-  onSubmit = e => {
-    const { form, addressInfo} = this.props;
-
-    e.preventDefault();
-    form.validateFields((err, values) => {
-      addressInfo({
-        ...values
-      });
-    });
-  };
   render() {
-    const { auth} = this.props;
+    const { auth} = this.props; //todo make private layout for redirect to /login
     const {getFieldDecorator} = this.props.form;
 
     return (
@@ -78,8 +51,8 @@ class BaseInformationPage extends Component {
                   <Button type="primary" onClick={this.onSubmit}>
                     Register
                   </Button>
-                  <Link to={'/login'}>
-                    <Button type="default" style={{marginLeft: '8px'}} onClick={this.onChange}>
+                  <Link to={'/'}>
+                    <Button type="default" style={{marginLeft: '8px'}}>
                       Cancel
                     </Button>
                   </Link>
@@ -91,25 +64,32 @@ class BaseInformationPage extends Component {
       </Layout.Content>
     );
   }
+  onSubmit = e => {
+    const { form, addressInfo, auth} = this.props;
+    console.log(auth.user.id);
+    e.preventDefault();
+    form.validateFields((err, values) => {
+      addressInfo({
+        id:auth.user.id,
+        ...values
+      });
+    });
+  };
 }
 
-BaseInformationPage.propTypes = {
+AddressInformationPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  city: state.city,
-  street: state.street,
-  house: state.house,
-  flat_number: state.flat_number,
-  address_index: state.address_index,
-  house_index: state.house_index,
-  errors: state.errors
+  errors: state.errors,
+  auth: state.auth
+
 });
 
 export default connect(
   mapStateToProps,
   { addressInfo }
-)(Form.create()(BaseInformationPage));
+)(Form.create()(AddressInformationPage));
