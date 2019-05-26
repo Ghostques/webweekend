@@ -9,6 +9,12 @@ module.exports = function validateNameInput(data) {
     data.gender = !isEmpty(data.gender) ? data.gender : "";
     data.national = !isEmpty(data.national) ? data.national : "";
 
+    pattern = '[0-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]';
+
+    if(data.birthday.search(pattern) == -1){
+        errors.birthday = "Дата рождения должна быть в формате YYYY-MM-DD"
+    }
+
     if (Validator.isEmpty(data.first_name)) {
         errors.first_name = "Необходимо ввести имя";
     }
